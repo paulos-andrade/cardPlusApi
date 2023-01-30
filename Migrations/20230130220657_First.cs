@@ -18,7 +18,8 @@ namespace cadPlusApi.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     CPF = table.Column<string>(type: "TEXT", nullable: false),
-                    Phone = table.Column<string>(type: "TEXT", nullable: false)
+                    Phone = table.Column<string>(type: "TEXT", nullable: false),
+                    Mail = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,8 +32,8 @@ namespace cadPlusApi.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    AddressName = table.Column<string>(type: "TEXT", nullable: true),
-                    CEP = table.Column<string>(type: "TEXT", nullable: true),
+                    AddressName = table.Column<string>(type: "TEXT", nullable: false),
+                    CEP = table.Column<string>(type: "TEXT", nullable: false),
                     UserId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

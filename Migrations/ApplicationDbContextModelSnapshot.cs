@@ -23,9 +23,11 @@ namespace cadPlusApi.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("AddressName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CEP")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("UserId")
@@ -45,6 +47,10 @@ namespace cadPlusApi.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("CPF")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Mail")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

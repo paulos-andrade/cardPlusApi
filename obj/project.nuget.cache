@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "aIJYPA9OOSCVMazx8SH+UnoE7ncT0w1OtCsMvFf1uEHBePsx2OnK4nig5ADe8TycYwopDe6jt7/PQG2/NLB+xg==",
+  "dgSpecHash": "lDPVrZekCaSJSKYHQwc13kSQhQHXOq1iWcq+Y7SIlE4b1634oU301z6PB7vCZy+enQHsTtWZ45Ef2VT1vUwLxA==",
   "success": true,
   "projectFilePath": "B:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\cadPlus-Api\\cadPlus-Api.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Makoto\\.nuget\\packages\\flunt\\2.0.5\\flunt.2.0.5.nupkg.sha512",
+    "C:\\Users\\Makoto\\.nuget\\packages\\flunt.extensions.br\\1.0.1\\flunt.extensions.br.1.0.1.nupkg.sha512",
     "C:\\Users\\Makoto\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Makoto\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.2\\microsoft.data.sqlite.core.7.0.2.nupkg.sha512",
     "C:\\Users\\Makoto\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.2\\microsoft.entityframeworkcore.7.0.2.nupkg.sha512",

@@ -10,7 +10,7 @@ using cadPlus_Api.Data;
 namespace cadPlusApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230130203630_First")]
+    [Migration("20230130220657_First")]
     partial class First
     {
         /// <inheritdoc />
@@ -26,9 +26,11 @@ namespace cadPlusApi.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("AddressName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CEP")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("UserId")
@@ -48,6 +50,10 @@ namespace cadPlusApi.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("CPF")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Mail")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
