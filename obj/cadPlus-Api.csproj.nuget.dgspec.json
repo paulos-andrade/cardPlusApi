@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "B:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\Cad_Api\\cadPlus-Api\\cadPlus-Api.csproj": {}
+    "B:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\cadPlus-Api\\cadPlus-Api.csproj": {}
   },
   "projects": {
-    "B:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\Cad_Api\\cadPlus-Api\\cadPlus-Api.csproj": {
+    "B:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\cadPlus-Api\\cadPlus-Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "B:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\Cad_Api\\cadPlus-Api\\cadPlus-Api.csproj",
+        "projectUniqueName": "B:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\cadPlus-Api\\cadPlus-Api.csproj",
         "projectName": "cadPlus-Api",
-        "projectPath": "B:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\Cad_Api\\cadPlus-Api\\cadPlus-Api.csproj",
+        "projectPath": "B:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\cadPlus-Api\\cadPlus-Api.csproj",
         "packagesPath": "C:\\Users\\Makoto\\.nuget\\packages\\",
-        "outputPath": "B:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\Cad_Api\\cadPlus-Api\\obj\\",
+        "outputPath": "B:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\cadPlus-Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
