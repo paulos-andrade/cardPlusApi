@@ -8,14 +8,13 @@
 
     public User(string Name, string CPF,string Phone,string Mail)
     {
-        this.Id = Id;
         this.Name = Name;
         this.CPF = CPF;
         this.Phone = Phone;
         this.Mail = Mail;
     }
-    public ICollection<Address> Addresses { get; set; }
 
-    
-    
+    public virtual ICollection<Address> Addresses { get; set; }
+
+
 }

@@ -8,7 +8,7 @@ namespace EndPoints
 
     public static class EndpointsList
     {
-        public static void RegisterUsersApis (this WebApplication app)
+        public static void RegisterUsersApis(this WebApplication app)
         {
 
             app.MapGet("v1/getAllUsers", async (ApplicationDbContext context) =>
@@ -25,19 +25,37 @@ namespace EndPoints
 
             }).Produces<User>();
 
-            app.MapPost("v1/insertUser", async (
-                ApplicationDbContext context, CreateUserViewModel userModel) =>
+            app.MapPost("v1/insertUserAndAddress", async (
+                ApplicationDbContext context, CreateUserAddressViewModel UserAddressViewModel) =>
             {
-                var user = userModel.Validate();
+                var model = UserAddressViewModel.Validate();
+                List<Address> list = new List<Address>();
 
-                if (userModel.IsValid)
+                if (UserAddressViewModel.IsValid)
                 {
-                    context.Users.Add(user);
+                    
+                    Address address = new (
+                       model.AddressName,
+                       model.CEP);
+
+                    User user = new (
+                        model.Name,
+                        model.CPF,
+                        model.Phone,
+                        model.Mail);
+
+                    list.Add(address);
+                    ICollection<Address> Adresses = list;
+                    user.Addresses = Adresses;
+                    context.Users.Add(user); //adiciona user
                     await context.SaveChangesAsync();
                     return Results.Created($"/v1/insertUser/{user.Id}", user);
                 }
-                return Results.BadRequest(userModel.Notifications);
+                return Results.BadRequest(UserAddressViewModel.Notifications);
             });
+
+
+
         }
     }
 }
