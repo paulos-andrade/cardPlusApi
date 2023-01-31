@@ -44,9 +44,12 @@ namespace EndPoints
                         model.Mail);
 
                     var addressValidationReturn = Validations.ValidateExistingItemsAddresses(address);
+                    if (addressValidationReturn != "")
+                        return Results.BadRequest(addressValidationReturn);
+
                     var userValidationReturn = Validations.ValidateHasExistingItemsUsers(user);
-                    if (userValidationReturn != "") return Results.BadRequest(userValidationReturn);
-                    if(addressValidationReturn != "") return Results.BadRequest(userValidationReturn);
+                    if (userValidationReturn != "") 
+                        return Results.BadRequest(userValidationReturn); 
 
                     list.Add(address);
                     ICollection<Address> Adresses = list;
