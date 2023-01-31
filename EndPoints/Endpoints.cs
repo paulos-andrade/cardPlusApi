@@ -26,14 +26,13 @@ namespace EndPoints
             }).Produces<User>();
 
             app.MapPost("v1/insertUserAndAddress", async (
-                ApplicationDbContext context, CreateUserAddressViewModel UserAddressViewModel) =>
+                ApplicationDbContext context, CreateUserAddressViewModel createUserAddressViewModel) =>
             {
-                var model = UserAddressViewModel.Validate();
+                var model = createUserAddressViewModel.Validate();
                 List<Address> list = new List<Address>();
 
-                if (UserAddressViewModel.IsValid)
+            if (createUserAddressViewModel.IsValid)
                 {
-                    
                     Address address = new (
                        model.AddressName,
                        model.CEP);
@@ -44,6 +43,11 @@ namespace EndPoints
                         model.Phone,
                         model.Mail);
 
+                    var addressValidationReturn = Validations.ValidateExistingItemsAddresses(address);
+                    var userValidationReturn = Validations.ValidateHasExistingItemsUsers(user);
+                    if (userValidationReturn != "") return Results.BadRequest(userValidationReturn);
+                    if(addressValidationReturn != "") return Results.BadRequest(userValidationReturn);
+
                     list.Add(address);
                     ICollection<Address> Adresses = list;
                     user.Addresses = Adresses;
@@ -51,7 +55,7 @@ namespace EndPoints
                     await context.SaveChangesAsync();
                     return Results.Created($"/v1/insertUser/{user.Id}", user);
                 }
-                return Results.BadRequest(UserAddressViewModel.Notifications);
+                return Results.BadRequest(createUserAddressViewModel.Notifications);
             });
 
 

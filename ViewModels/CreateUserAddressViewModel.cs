@@ -1,7 +1,6 @@
 ﻿using Flunt.Notifications;
 using Flunt.Validations;
 using Flunt.Extensions.Br.Validations;
-using cadPlus_Api.Models;
 
 namespace cadPlus_Api.ViewModels
 {
@@ -15,7 +14,7 @@ namespace cadPlus_Api.ViewModels
         public string Phone { get; set; }
         public string Mail { get; set; }
 
-        public UserAddress Validate()
+        public UserAndAddress Validate()
         {
             var contract = new Contract<Notification>()
                 .Requires()
@@ -29,7 +28,8 @@ namespace cadPlus_Api.ViewModels
 
             AddNotifications(contract);
 
-            return new UserAddress(Name, CPF, Phone, Mail, CEP, AddressName);
+
+            return new UserAndAddress(Name, CPF, Phone, Mail, CEP, AddressName);
         }
 
     }

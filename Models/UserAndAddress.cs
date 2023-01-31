@@ -1,6 +1,4 @@
-﻿namespace cadPlus_Api.Models
-{
-    public class UserAddress
+﻿    public class UserAndAddress
     {
         public string AddressName { get; set; }
         public string CEP { get; set; }
@@ -10,7 +8,7 @@
         public string Phone { get; set; }
         public string Mail { get; set; }
 
-        public UserAddress(string Name, string CPF, string Phone, string Mail, string CEP, string AddressName)
+        public UserAndAddress(string Name, string CPF, string Phone, string Mail, string CEP, string AddressName)
         {
             this.Name = Name;
             this.CPF = CPF;
@@ -21,4 +19,3 @@
 
         }
     }
-}

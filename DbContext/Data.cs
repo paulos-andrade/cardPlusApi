@@ -18,5 +18,28 @@ namespace cadPlus_Api.Data
                   .Ignore(c => c.User);
         }
     }
+    public static class Validations
+    {
+        public static string ValidateHasExistingItemsUsers(User user)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            var uservalueMail = context.Users.FirstOrDefault(x => x.Mail == user.Mail);
+            var uservalueCPF = context.Users.FirstOrDefault(x => x.CPF == user.CPF);
+
+            if (uservalueMail != null)
+                return "Email já existe na base!";
+            else if (uservalueCPF != null) 
+                return "CPF já existe na base!";
+            else return "";
+        }
+        public static string ValidateExistingItemsAddresses(Address address)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            var uservalue = context.Addresses.FirstOrDefault(x => x.CEP == address.CEP);
+            if (uservalue != null)
+                return "CEP já existe na base!";
+            else return "";
+        }
+    }
 
 }

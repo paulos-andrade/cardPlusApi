@@ -14,7 +14,7 @@
         this.Mail = Mail;
     }
 
-    public virtual ICollection<Address> Addresses { get; set; }
+    public ICollection<Address> Addresses { get; set; }
 
 
 }
