@@ -10,7 +10,7 @@ using cadPlus_Api.Data;
 namespace cadPlusApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230130220657_First")]
+    [Migration("20230131235554_First")]
     partial class First
     {
         /// <inheritdoc />
@@ -21,7 +21,7 @@ namespace cadPlusApi.Migrations
 
             modelBuilder.Entity("Address", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AddressId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -36,7 +36,7 @@ namespace cadPlusApi.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.HasKey("AddressId");
 
                     b.HasIndex("UserId");
 
@@ -45,7 +45,7 @@ namespace cadPlusApi.Migrations
 
             modelBuilder.Entity("User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -65,20 +65,18 @@ namespace cadPlusApi.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Address", b =>
                 {
-                    b.HasOne("User", "User")
+                    b.HasOne("User", null)
                         .WithMany("Addresses")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("User", b =>

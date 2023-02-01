@@ -20,7 +20,7 @@ namespace EndPoints
 
             app.MapGet("v1/getUser/{id}", async (int id, ApplicationDbContext context) =>
             {
-                var users = await context.Users.FirstOrDefaultAsync(x => x.Id == id);
+                var users = await context.Users.FirstOrDefaultAsync(x => x.UserId == id);
                 return Results.Ok(users);
 
             }).Produces<User>();
@@ -29,34 +29,25 @@ namespace EndPoints
                 ApplicationDbContext context, CreateUserAddressViewModel createUserAddressViewModel) =>
             {
                 var model = createUserAddressViewModel.Validate();
-                List<Address> list = new List<Address>();
 
-            if (createUserAddressViewModel.IsValid)
+                if (createUserAddressViewModel.IsValid)
                 {
-                    Address address = new (
-                       model.AddressName,
-                       model.CEP);
+                    Address address = new( model.AddressName, model.CEP);
 
-                    User user = new (
-                        model.Name,
-                        model.CPF,
-                        model.Phone,
-                        model.Mail);
+                    User user = new(model.Name,model.CPF, model.Phone,model.Mail);
 
                     var addressValidationReturn = Validations.ValidateExistingItemsAddresses(address);
                     if (addressValidationReturn != "")
                         return Results.BadRequest(addressValidationReturn);
 
                     var userValidationReturn = Validations.ValidateHasExistingItemsUsers(user);
-                    if (userValidationReturn != "") 
-                        return Results.BadRequest(userValidationReturn); 
+                    if (userValidationReturn != "")
+                        return Results.BadRequest(userValidationReturn);
 
-                    list.Add(address);
-                    ICollection<Address> Adresses = list;
-                    user.Addresses = Adresses;
                     context.Users.Add(user); //adiciona user
+                    user.Addresses.Add(address);
                     await context.SaveChangesAsync();
-                    return Results.Created($"/v1/insertUser/{user.Id}", user);
+                    return Results.Created($"/v1/insertUser/{user.UserId}", user);
                 }
                 return Results.BadRequest(createUserAddressViewModel.Notifications);
             });

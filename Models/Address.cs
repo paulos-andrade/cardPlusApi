@@ -1,9 +1,10 @@
 ﻿public class Address
 {
-    public int Id { get; set; }
+    public int AddressId { get; set; }
     public string AddressName { get; set; }
     public string CEP { get; set; }
-    public User User { get; set; }
+    public virtual User User { get; set; }
+    public int UserId { get; set; }
 
     public Address(string AddressName, string CEP)
     {

@@ -14,6 +14,7 @@ namespace cadPlus_Api.Data
          .HasMany(c => c.Addresses)
          .WithOne(e => e.User)
          .IsRequired();
+
             modelBuilder.Entity<Address>()
                   .Ignore(c => c.User);
         }
