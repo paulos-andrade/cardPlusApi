@@ -24,7 +24,7 @@ namespace cadPlus_Api.Data
         public static string ValidateHasExistingItemsUsers(User user)
         {
             ApplicationDbContext context = new ApplicationDbContext();
-            var uservalueMail = context.Users.FirstOrDefault(x => x.Mail == user.Mail);
+            var uservalueMail = context.Users.FirstOrDefault(x => x.Mail == user.Mail || );
             var uservalueCPF = context.Users.FirstOrDefault(x => x.CPF == user.CPF);
 
             if (uservalueMail != null)
