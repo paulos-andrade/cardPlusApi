@@ -14,6 +14,7 @@ namespace EndPoints
             app.MapGet("v1/getAllUsers", async (ApplicationDbContext context) =>
             {
                 var users = await context.Users.ToListAsync();
+                var Addres =  context.Addresses.ToListAsync(); //forçar o carregamento dos filhos que não estavam vindo
                 return Results.Ok(users);
 
             }).Produces<User>(); // retorna o Schema do user
