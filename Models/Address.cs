@@ -11,5 +11,11 @@
         this.AddressName = AddressName;
         this.CEP = CEP;
     }
+    public Address(string AddressName, string CEP, int UserId)
+    {
+        this.AddressName = AddressName;
+        this.CEP = CEP;
+        this.UserId = UserId;
+    }
 }
 

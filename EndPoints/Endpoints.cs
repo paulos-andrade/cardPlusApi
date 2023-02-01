@@ -10,7 +10,7 @@ namespace EndPoints
     {
         public static void RegisterUsersApis(this WebApplication app)
         {
-
+            //Get ALL Users
             app.MapGet("v1/getAllUsers", async (ApplicationDbContext context) =>
             {
                 var users = await context.Users.ToListAsync();
@@ -18,6 +18,7 @@ namespace EndPoints
 
             }).Produces<User>(); // retorna o Schema do user
 
+            //Get A User
             app.MapGet("v1/getUser/{id}", async (int id, ApplicationDbContext context) =>
             {
                 var users = await context.Users.FirstOrDefaultAsync(x => x.UserId == id);
@@ -25,6 +26,7 @@ namespace EndPoints
 
             }).Produces<User>();
 
+            //Add User And Address
             app.MapPost("v1/insertUserAndAddress", async (
                 ApplicationDbContext context, CreateUserAddressViewModel createUserAddressViewModel) =>
             {
@@ -60,6 +62,37 @@ namespace EndPoints
                 return Results.BadRequest(createUserAddressViewModel.Notifications);
             });
 
+            //Add Address
+            app.MapPost("v1/user/{userId}/addAddress/", async (
+                int userId,ApplicationDbContext context, CreateAddressViewModel createAddressViewModel) =>
+            {
+                var model = createAddressViewModel.Validate();
+
+                if (createAddressViewModel.IsValid)
+                {
+                    try
+                    {
+                        Address address = new(model.AddressName, model.CEP, model.UserId = userId);
+
+                        var addressValidationReturn = Validations.ValidateExistingItemsAddresses(address);
+                        if (addressValidationReturn != "")
+                            return Results.BadRequest(addressValidationReturn);
+
+                        context.Addresses.Add(address); //adiciona Address
+                        await context.SaveChangesAsync();
+                        return Results.Created($"/v1/addAddress/{address.AddressId}", address);
+                    }
+                    catch (Exception)
+                    {
+                        Results.BadRequest();
+                        throw;
+                    }
+                }
+                return Results.BadRequest(createAddressViewModel.Notifications);
+            });
+
+
+            //Update User
             app.MapPut("v1/updateUser/{id}", async (int id,
                ApplicationDbContext context, CreateUserViewModel CreateUserViewModel) =>
             {
@@ -71,17 +104,17 @@ namespace EndPoints
                     if (user == null)
                         return Results.NotFound();
 
+                    var userValidationReturn = Validations.ValidateHasExistingItemsUsers(user);
+                    if (userValidationReturn != "")
+                        return Results.BadRequest(userValidationReturn);
+
                     try
                     {
-                        var userValidationReturn = Validations.ValidateHasExistingItemsUsers(user);
-                        if (userValidationReturn != "")
-                            return Results.BadRequest(userValidationReturn);
-
                         user.Name = model.Name;
                         user.CPF = model.CPF;
-                        user.Phone = user.Phone;
+                        user.Phone = model.Phone;
                         user.Mail = model.Mail;
-                        context.Users.Add(user); //adiciona user
+                        context.Users.Update(user); //adiciona user
                         await context.SaveChangesAsync();
                         return Results.Ok();
                     }
@@ -91,9 +124,10 @@ namespace EndPoints
                         throw;
                     }
                 }
-                return Results.BadRequest();
+                return Results.BadRequest(CreateUserViewModel.Notifications);
             });
 
+            //Update Address
             app.MapPut("v1/updateUser/user/{id}/address/{addressId}", async (int id, int addressId,
                ApplicationDbContext context, CreateAddressViewModel CreateAddressViewModel) =>
             {
@@ -112,8 +146,8 @@ namespace EndPoints
                             return Results.BadRequest(userValidationReturn);
 
                         address.AddressName = model.AddressName;
-                        address.CEP = address.CEP;
-                        context.Addresses.Add(address); //adiciona address
+                        address.CEP = model.CEP;
+                        context.Addresses.Update(address); //adiciona address
                         await context.SaveChangesAsync();
                         return Results.Ok();
                     }
