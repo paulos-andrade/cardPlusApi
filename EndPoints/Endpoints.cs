@@ -11,11 +11,28 @@ namespace EndPoints
         public static void RegisterUsersApis(this WebApplication app)
         {
             //User Login
-            app.MapPost("v1/login/{pw}", async (
-                int userId, ApplicationDbContext context, CreateAddressViewModel createAddressViewModel) =>
+            app.MapPost("v1/login", async (ApplicationDbContext context, CreateLoginViewModel createLoginViewModel) =>
             {
-              
-                return Results.BadRequest(createAddressViewModel.Notifications);
+                var model = createLoginViewModel;
+                try
+                {
+                    var users = await context.Users.FirstOrDefaultAsync(x => x.Mail == model.Mail.ToLower());
+                    if (users != null)
+                    {
+                       var pwIsCorrect = users.Password == model.Password;
+                        if (pwIsCorrect)
+                        {
+                            return Results.Ok(users.UserId);
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return Results.BadRequest();
+                }
+
+                return Results.BadRequest();
             });
 
             //User Register
@@ -31,7 +48,7 @@ namespace EndPoints
                     {
                         Address address = new(model.AddressName, model.CEP);
 
-                        User user = new(model.Name, model.CPF, model.Phone, model.Mail, model.Password);
+                        User user = new(model.Name, model.CPF, model.Phone, model.Mail.ToLower(), model.Password);
 
                         var addressValidationReturn = Validations.ValidateExistingItemsAddresses(address);
                         if (addressValidationReturn != "")
@@ -53,13 +70,6 @@ namespace EndPoints
                     }
                 }
                 return Results.BadRequest(createUserAddressViewModel.Notifications);
-            });
-
-            app.MapPost("v1/login/{pw}", async (
-                int userId, ApplicationDbContext context, CreateAddressViewModel createAddressViewModel) =>
-            {
-
-                return Results.BadRequest(createAddressViewModel.Notifications);
             });
 
             //Get ALL Users
