@@ -10,25 +10,17 @@ namespace EndPoints
     {
         public static void RegisterUsersApis(this WebApplication app)
         {
-            //Get ALL Users
-            app.MapGet("v1/getAllUsers", async (ApplicationDbContext context) =>
+            //User Login
+            app.MapPost("v1/login/{pw}", async (
+                int userId, ApplicationDbContext context, CreateAddressViewModel createAddressViewModel) =>
             {
-                var users = await context.Users.ToListAsync();
-                var Addres =  context.Addresses.ToListAsync(); //forçar o carregamento dos filhos que não estavam vindo
-                return Results.Ok(users);
+              
+                return Results.BadRequest(createAddressViewModel.Notifications);
+            });
 
-            }).Produces<User>(); // retorna o Schema do user
-
-            //Get A User
-            app.MapGet("v1/getUser/{id}", async (int id, ApplicationDbContext context) =>
-            {
-                var users = await context.Users.FirstOrDefaultAsync(x => x.UserId == id);
-                return Results.Ok(users);
-
-            }).Produces<User>();
-
-            //Add User And Address
-            app.MapPost("v1/insertUserAndAddress", async (
+            //User Register
+            //Register User And Address
+            app.MapPost("v1/registerUser", async (
                 ApplicationDbContext context, CreateUserAddressViewModel createUserAddressViewModel) =>
             {
                 var model = createUserAddressViewModel.Validate();
@@ -39,7 +31,7 @@ namespace EndPoints
                     {
                         Address address = new(model.AddressName, model.CEP);
 
-                        User user = new(model.Name, model.CPF, model.Phone, model.Mail);
+                        User user = new(model.Name, model.CPF, model.Phone, model.Mail, model.Password);
 
                         var addressValidationReturn = Validations.ValidateExistingItemsAddresses(address);
                         if (addressValidationReturn != "")
@@ -62,6 +54,30 @@ namespace EndPoints
                 }
                 return Results.BadRequest(createUserAddressViewModel.Notifications);
             });
+
+            app.MapPost("v1/login/{pw}", async (
+                int userId, ApplicationDbContext context, CreateAddressViewModel createAddressViewModel) =>
+            {
+
+                return Results.BadRequest(createAddressViewModel.Notifications);
+            });
+
+            //Get ALL Users
+            app.MapGet("v1/getAllUsers", async (ApplicationDbContext context) =>
+            {
+                var users = await context.Users.ToListAsync();
+                var Addres = await context.Addresses.ToListAsync(); //forçar o carregamento dos filhos que não estavam vindo
+                return Results.Ok(users);
+
+            }).Produces<User>(); // retorna o Schema do user
+
+            //Get A User
+            app.MapGet("v1/getUser/{id}", async (int id, ApplicationDbContext context) =>
+            {
+                var users = await context.Users.FirstOrDefaultAsync(x => x.UserId == id);
+                return Results.Ok(users);
+
+            }).Produces<User>();
 
             //Add Address
             app.MapPost("v1/user/{userId}/addAddress/", async (

@@ -9,8 +9,9 @@
     public string CPF { get; set; }
     public string Phone { get; set; }
     public string Mail { get; set; }
-
-    public User(string Name, string CPF,string Phone,string Mail)
+    //public string Password { get; set; }
+    public string Password { get; set; }
+    public User(string Name, string CPF,string Phone,string Mail, string Password)
     {
         this.Name = Name;
         this.CPF = CPF;

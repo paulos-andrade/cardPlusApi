@@ -10,7 +10,8 @@ namespace cadPlus_Api.ViewModels
         public string CPF { get; set; }
         public string Phone { get; set; }
         public string Mail { get; set; }
-        
+        public string Password { get; set; }
+
 
         public User Validate()
         {
@@ -19,14 +20,16 @@ namespace cadPlus_Api.ViewModels
                 .IsNotNull(Name, "Informe o Nome!")
                 .IsGreaterThan(Name, 4, "O Nome deve conter mais que 4 caracteres!")
                 .IsEmail(Mail, "Email Inválido!")
-                .IsCpf(CPF,"Cpf Inválido")
+                .IsCpf(CPF, "Cpf Inválido")
                 .IsPhoneNumber(Phone, "Telefone Inválido");
-                
             AddNotifications(contract);
 
-            return new User(Name, CPF, Phone, Mail);
+            return new User(Name, CPF, Phone, Mail, Password);
         }
 
-        
+        public static Contract<T> IsPassword<T>(this Contract<T> contract, string val, string key, string message)
+        {
+            return contract.Matches(val, CustomRegexPattern.PhoneRegexPattern, key, message);
+        }
     }
 }
