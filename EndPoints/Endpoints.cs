@@ -16,7 +16,7 @@ namespace EndPoints
                 var model = createLoginViewModel;
                 try
                 {
-                    var users = await context.Users.FirstOrDefaultAsync(x => x.Mail == model.Mail.ToLower());
+                    var users = await context.Users.FirstOrDefaultAsync(x => x.Mail == model.Username.ToLower());
                     if (users != null)
                     {
                        var pwIsCorrect = users.Password == model.Password;
