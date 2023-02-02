@@ -17,6 +17,7 @@
         this.AddressName = AddressName;
         this.Mail = Mail;
         this.CEP = CEP;
+        this.Password = Password;
 
     }
 }

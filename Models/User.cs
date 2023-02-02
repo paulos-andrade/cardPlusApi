@@ -1,4 +1,6 @@
-﻿public class User
+﻿using System.Text.Json.Serialization;
+
+public class User
 {
     public User()
     {
@@ -9,8 +11,8 @@
     public string CPF { get; set; }
     public string Phone { get; set; }
     public string Mail { get; set; }
-    //public string Password { get; set; }
-    public string Password { get; set; }
+
+    [JsonIgnore] public string Password { get; set; }
     public User(string Name, string CPF,string Phone,string Mail, string Password)
     {
         this.Name = Name;
