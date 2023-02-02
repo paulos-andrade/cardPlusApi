@@ -26,10 +26,5 @@ namespace cadPlus_Api.ViewModels
 
             return new User(Name, CPF, Phone, Mail, Password);
         }
-
-        public static Contract<T> IsPassword<T>(this Contract<T> contract, string val, string key, string message)
-        {
-            return contract.Matches(val, CustomRegexPattern.PhoneRegexPattern, key, message);
-        }
     }
 }

@@ -17,6 +17,7 @@
         this.CPF = CPF;
         this.Phone = Phone;
         this.Mail = Mail;
+        this.Password = Password;
     }
     public ICollection<Address>? Addresses { get; set; } = new List<Address>();
     

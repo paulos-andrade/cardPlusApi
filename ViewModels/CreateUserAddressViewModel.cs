@@ -26,7 +26,7 @@ namespace cadPlus_Api.ViewModels
                 .IsPhoneNumber(Phone, "Telefone Inválido")
                 .IsNotNull(AddressName, "Informe um endereço Válido!")
                 .IsZipCode(CEP, "Informe um CEP Válido!")
-                .IsCustomPassword(Password, "A senha precisa ...");
+                .IsCustomPassword(Password, "", "A senha precisa ter 8 caracteres entre letras maiúsculas, minúsculas e caracteres especiais");
 
             AddNotifications(contract);
 
@@ -37,13 +37,13 @@ namespace cadPlus_Api.ViewModels
     }
     public static class Extension
     {
-        public static Contract<T> IsCustomPassword<T>(this Contract<T> contract, string val, string message)
+        public static Contract<T> IsCustomPassword<T>(this Contract<T> contract, string val, string key, string message)
         {
-            return contract.Matches(val, Extension.CustomRegexPattern.IsNotPasswordRegexPattern, message);
+            return contract.Matches(val, Extension.CustomRegexPattern.PasswordRegexPattern,key, message);
         }
         public static class CustomRegexPattern
         {
-            public static string IsNotPasswordRegexPattern = "^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$";
+            public static string PasswordRegexPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
         }
     }
 }
