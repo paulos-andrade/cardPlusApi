@@ -26,7 +26,7 @@ namespace cadPlus_Api.ViewModels
                 .IsPhoneNumber(Phone, "Telefone Inválido")
                 .IsNotNull(AddressName, "Informe um endereço Válido!")
                 .IsZipCode(CEP, "Informe um CEP Válido!")
-                .IsCustomPassword(Password, "", "A senha precisa ter 8 caracteres letras maiúsculas, minúsculas e caracteres especiais");
+                .IsCustomPassword(Password, "", "A senha precisa ter 10 caracteres letras maiúsculas, minúsculas e caracteres especiais");
 
             AddNotifications(contract);
 

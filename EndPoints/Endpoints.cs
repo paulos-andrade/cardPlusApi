@@ -89,6 +89,14 @@ namespace EndPoints
 
             }).Produces<User>();
 
+            //Get Addresses
+            app.MapGet("v1/getAddressesByUser/{id}", async (int id, ApplicationDbContext context) =>
+            {
+                var adresses = await context.Addresses.Where(x => x.UserId == id).ToListAsync();
+                return Results.Ok(adresses);
+
+            });
+
             //Add Address
             app.MapPost("v1/user/{userId}/addAddress/", async (
                 int userId,ApplicationDbContext context, CreateAddressViewModel createAddressViewModel) =>

@@ -10,7 +10,7 @@ namespace cadPlus_Api.ViewModels
         public string AddressName { get; set; }
         public string CEP { get; set; }
         public User User { get; set; }
-
+        public int ? AddressId { get; set; }
         public Address Validate()
         {
 

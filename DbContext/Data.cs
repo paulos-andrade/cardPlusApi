@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace cadPlus_Api.Data
 {
@@ -26,17 +27,18 @@ namespace cadPlus_Api.Data
             ApplicationDbContext context = new ApplicationDbContext();
             var uservalueMail = context.Users.FirstOrDefault(x => x.Mail == user.Mail && x.UserId != user.UserId);
             var uservalueCPF = context.Users.FirstOrDefault(x => x.CPF == user.CPF && x.UserId != user.UserId);
+            string error;
 
             if (uservalueMail != null)
-                return "Email já existe na base!";
+                return error = JsonSerializer.Serialize("Email já existe na base!");
             else if (uservalueCPF != null) 
-                return "CPF já existe na base!";
+                return error = JsonSerializer.Serialize("CPF já existe na base!"); 
             else return "";
         }
         public static string ValidateExistingItemsAddresses(Address address)
         {
             ApplicationDbContext context = new ApplicationDbContext();
-            var uservalue = context.Addresses.FirstOrDefault(x => x.CEP == address.CEP && x.UserId != address.UserId); //Verifica se o mesmo CEP exite para outro usuário
+            var uservalue = context.Addresses.FirstOrDefault(x => x.CEP == address.CEP); //Verifica se o mesmo CEP exite para outro usuário
             if (uservalue != null)
                 return "CEP já existe na base!";
             else return "";
