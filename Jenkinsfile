@@ -1,15 +1,11 @@
-﻿pipeline    
-{
-    agent any   
-     {
-        stages 
-        {
-            stage ('Initial')
-            {
-                steps {
-                    echo 'Initializing'
-                    }
-            }
-        }   
-     }
+pipeline {
+  agent any {
+    stages {
+      stage('Initial') {
+        steps {
+          echo 'Initializing'
+        }
+      }
+    }
+  }
 }
