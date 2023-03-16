@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "B:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\cadPlus-Api\\cadPlus-Api.csproj": {}
+    "H:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\cardPlusApi\\cadPlus-Api.csproj": {}
   },
   "projects": {
-    "B:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\cadPlus-Api\\cadPlus-Api.csproj": {
+    "H:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\cardPlusApi\\cadPlus-Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "B:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\cadPlus-Api\\cadPlus-Api.csproj",
+        "projectUniqueName": "H:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\cardPlusApi\\cadPlus-Api.csproj",
         "projectName": "cadPlus-Api",
-        "projectPath": "B:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\cadPlus-Api\\cadPlus-Api.csproj",
-        "packagesPath": "C:\\Users\\Makoto\\.nuget\\packages\\",
-        "outputPath": "B:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\cadPlus-Api\\obj\\",
+        "projectPath": "H:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\cardPlusApi\\cadPlus-Api.csproj",
+        "packagesPath": "C:\\Users\\WCTWo\\.nuget\\packages\\",
+        "outputPath": "H:\\Trabalho\\Estudos\\C#\\misc\\CadPlus\\cardPlusApi\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Makoto\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\WCTWo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -68,7 +65,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -80,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.308\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.300-preview.23122.5\\RuntimeIdentifierGraph.json"
         }
       }
     }
